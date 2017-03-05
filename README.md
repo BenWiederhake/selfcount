@@ -140,19 +140,38 @@ This ends up being identical.  This is quite intuitive,
 as the amount of zeros and the amount of ones anti-correlate.
 
 ```
-$ ./selfcount.py 1852673427797059126777135760139006525652319754650249024631321344126610074239106
+$ ./selfcount.py inv 129 | head -n1
+3
+$ python3 -c 'print(2**12+6)'
+4102
+$ ./selfcount.py inv $(python3 -c 'print(2**12+6)') | head -n1
+4
+$ ./selfcount.py inv $(python3 -c 'print(2**136+6)') | head -n1
+5
+$ ./selfcount.py inv $(python3 -c 'print(2**260+130)') | head -n1
 6
-{1852673427797059126777135760139006525652319754650249024631321344126610074239104,
-1852673427797059126777135760139006525652319754650249024631321344126610074238851,
-1852673427797059126777135760139006525652319754650249024631321344126610074238852,
-1852673427797059126777135760139006525652319754650249024631321344126610074239099,
-1852673427797059126777135760139006525652319754650249024631321344126610074239100,
-1852673427797059126777135760139006525652319754650249024631321344126610074238847}
+$ ./selfcount.py inv $(python3 -c 'print(2**4233+130)') | head -n1
+7
+$ ./selfcount.py inv $(python -c 'print(2**8206+4103)') | head -n1
+8
+$ time ./selfcount.py inv $(python -c 'print(2**8206+4103)') | head -n1
+8
+
+real	0m0,293s
+user	0m0,260s
+sys	0m0,020s
 ```
 
-So I can verify the results he got for 6 inverses.
+So I can verify the results he got for 8 inverses, and quite quickly so.
 For the higher results,
 outputting the stream of numbers seems to be the limiting factor.
+
+### The pattern
+
+There's an obvious pattern to the numbers:
+it's always `2^m+k+1`, where k is an earlier candidate: 5, 5, 129, 129, 4102, 4102.
+
+The exponent can apparently be described by [some other black magic](https://oeis.org/A230303).
 
 ## Contributing
 
