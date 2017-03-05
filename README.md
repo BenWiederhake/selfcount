@@ -49,24 +49,24 @@ by just a few inequalities, and then started wondering what the pattern looks li
 ## Example results
 
 ```
-$ ./selfcount.py
+$ ./selfcount.py all
 {0, 2, 3, 5, 7, 8, 9, 10, 11, 12, 14, 16, 17, 19, 20, 22, 24, 25, 26, 27, 28, 29, 31, 33, 34, 35, 36, 38, 40, 41, 42, 43, 44, 45, 47, 49, 50, 52, 53, 55, 57, 58, 59, 60, 61, 62, 64, 65, 66, 67, 68, 69, 70, 72, 73, 74, 75, 76, 77, 79, 81, 82, 84, 85, 87, 89, 90, 91, 92, 93, 94, 96, 98, 99, 100, 101, 103, 105, 106, 107, 108, 109, 110, 112, 114, 115, 117, 118, 120, 122, 123, 124, 125, 126, 127}
-$ ./selfcount.py 0
+$ ./selfcount.py about 0
 v and its zeros: {0: 0}
 self-maps: {0}
-$ ./selfcount.py 3
+$ ./selfcount.py about 3
 v and its zeros: {2: 2}
 self-maps: {2}
-$ ./selfcount.py 24
+$ ./selfcount.py about 24
 v and its zeros: {20: 22, 21: 21, 22: 21, 23: 20}
 self-maps: {21}
-$ ./selfcount.py 32
+$ ./selfcount.py about 32
 v and its zeros: {28: 29, 29: 28, 30: 28, 31: 27}
 self-maps: set()
-$ ./selfcount.py 128
+$ ./selfcount.py about 128
 v and its zeros: {122: 123, 123: 122, 124: 123, 125: 122, 126: 122, 127: 121}
 self-maps: set()
-$ ./selfcount.py 256
+$ ./selfcount.py about 256
 v and its zeros: {249: 250, 250: 250, 251: 249, 252: 250, 253: 249, 254: 249, 255: 248}
 self-maps: {250}
 $ 
@@ -89,10 +89,10 @@ The other inequalities look similar.  For more details, see the source code, fun
 No, sadly:
 
 ```
-$ ./selfcount.py 8
+$ ./selfcount.py about 8
 v and its zeros: {6: 6, 7: 5}
 self-maps: {6}
-$ ./selfcount.py 16
+$ ./selfcount.py about 16
 v and its zeros: {13: 13, 14: 13, 15: 12}
 self-maps: {13}
 ```
@@ -102,7 +102,7 @@ self-maps: {13}
 Yes!
 
 ```
-$ ./selfcount.py 64
+$ ./selfcount.py about 64
 v and its zeros: {59: 59, 60: 60, 61: 59, 62: 59, 63: 58}
 self-maps: {59, 60}
 ```
@@ -123,13 +123,23 @@ Whereas "my" way of thinking about it could be described as:
 
 > x(n) = number of distinct k which satisfy k = n - bitcount(k)
 
+This ends up being identical.  This is quite intuitive,
+as the amount of zeros and the amount of ones anti-correlate.
+
 ```
 $ ./selfcount.py 1852673427797059126777135760139006525652319754650249024631321344126610074239106
-(SNIP intermediate results)
-self-maps: {1852673427797059126777135760139006525652319754650249024631321344126610074239104, 1852673427797059126777135760139006525652319754650249024631321344126610074238851, 1852673427797059126777135760139006525652319754650249024631321344126610074238852, 1852673427797059126777135760139006525652319754650249024631321344126610074239099, 1852673427797059126777135760139006525652319754650249024631321344126610074239100, 1852673427797059126777135760139006525652319754650249024631321344126610074238847}
+6
+{1852673427797059126777135760139006525652319754650249024631321344126610074239104,
+1852673427797059126777135760139006525652319754650249024631321344126610074238851,
+1852673427797059126777135760139006525652319754650249024631321344126610074238852,
+1852673427797059126777135760139006525652319754650249024631321344126610074239099,
+1852673427797059126777135760139006525652319754650249024631321344126610074239100,
+1852673427797059126777135760139006525652319754650249024631321344126610074238847}
 ```
 
-So I can verify the results he got for 6 inverses.  For the higher results, outputting the stream of numbers seems to be the limiting factor
+So I can verify the results he got for 6 inverses.
+For the higher results,
+outputting the stream of numbers seems to be the limiting factor.
 
 ## Contributing
 
