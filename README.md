@@ -84,7 +84,7 @@ then there is an "obvious" reason why it can't possibly work.
 For example, there's no way a 12345-bit number has more than 12345 zero bits.
 The other inequalities look similar.  For more details, see the source code, function `search`.
 
-### Are there other such 8-bit or 16-bit numbers?
+### "Are there other such 8-bit or 16-bit numbers?"
 
 No, sadly:
 
@@ -97,7 +97,7 @@ v and its zeros: {13: 13, 14: 13, 15: 12}
 self-maps: {13}
 ```
 
-### Are there some bitwidths for which several such numbers exist?
+### "Are there some bitwidths for which several such numbers exist?"
 
 Yes!
 
@@ -109,13 +109,19 @@ self-maps: {59, 60}
 
 I'm not sure how these bitwidths can be constructed in general.
 
-### For which bitwidths are there such numbers at all?
+### "For which bitwidths are there such numbers at all?  What's the pattern?"
 
 I have no idea.
 
-### Is there an underlying pattern?
+### "The amount of unique numbers is [A228085](https://oeis.org/A228085)!"
 
-Good question.
+Nearly!  The sequence is defined as:
+
+> a(n) = number of distinct k which satisfy n = k + bitcount(k)
+
+Whereas "my" way of thinking about it could be described as:
+
+> x(n) = number of distinct k which satisfy k = n - bitcount(k)
 
 ## Contributing
 
