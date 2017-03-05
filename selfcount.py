@@ -39,10 +39,10 @@ def search(n):
     # n > 0
     # => v > 0
     # => v < n
-    # => v >= n - floor(log2(n-1))
+    # => v >= n - floor(log2(n - 1)) - 1
     # And that's small enough to be searched
     # by brute force, even if n is large.
-    start = n - floor(log2(n - 1))
+    start = n - floor(log2(n - 1)) - 1
     return {v: zeros(v, n) for v in range(start, n)}
 
 
