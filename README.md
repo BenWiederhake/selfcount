@@ -24,13 +24,22 @@ All these questions and more can be answered by simply running the program!
 
 ## Usage
 
-Usage: `./selfcount [N]`
+Usage: `./selfcount.py {COMMAND} [ARGS]`
 
-If no `N` is given, `./selfcount.py` prints the set of bitwidths up to
-some hard-coded but easily configurable amount
+`./selfcount.py all`:
+Prints the set of bitwidths (up to some hard-coded but easily configurable amount)
 that have such a self-describing number.
 
-If `N` is given, then a short analysis of the bitwidth N is printed.
+`./selfcount.py about N`:
+A short analysis of the bitwidth N is printed.
+
+`./selfcount.py all_inv`:
+For each bitwidth (up to some hard-coded but easily configurable amount)
+prints how many self-describing numbers there are.
+
+`./selfcount.py inv N`:
+Prints the amount of self-descriptive numbers of N on the first line,
+followed by the numbers themselves (in an unordered manner).
 
 Running time and consumed memory is roughly logarithmic in N.
 So this program has absolutely no problem to reason about bitwidths like 65535.
