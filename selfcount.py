@@ -56,11 +56,21 @@ Usage: {prog} {{COMMAND}} [ARGS]
 COMMAND can be any of:
 
     {prog} all
-{prog} prints the set of bitwidths (up to {upper})
+Prints the set of bitwidths (up to {upper})
 that have such a self-describing number.
 
     {prog} about N
 A short analysis of the bitwidth N is printed.
+
+    {prog} all_inv
+For each bitwidth (up to {upper})
+prints how many self-describing numbers there are.
+
+    {prog} inv N
+Prints the amount of self-descriptive numbers of N on the first line,
+followed by the inverses themselves (in an unordered manner).
+
+The name "inverse" stems from A228085: https://oeis.org/A228085
 
 Running time and consumed memory is roughly logarithmic in N.
 So this program has absolutely no problem to reason about bitwidths like 65535.
@@ -85,6 +95,11 @@ def analyze_all():
     print({n for (n, s) in all_selves.items() if len(s) != 0})
 
 
+def invert_all():
+    all_selves = {n: selves(n) for n in range(0, UPPER)}
+    print({n: len(s) for (n, s) in all_selves.items() if len(s) != 0})
+
+
 if __name__ == "__main__":
     from sys import argv
     if len(argv) <= 1:
@@ -93,5 +108,11 @@ if __name__ == "__main__":
         analyze_single(int(argv[2]))
     elif argv[1] == "all" and len(argv) == 2:
         analyze_all()
+    elif argv[1] == "all_inv" and len(argv) == 2:
+        invert_all()
+    elif argv[1] == "inv" and len(argv) == 3:
+        s = selves(int(argv[2]))
+        print(len(s))
+        print(s)
     else:
         usage()
