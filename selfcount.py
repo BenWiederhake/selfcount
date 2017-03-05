@@ -64,14 +64,29 @@ So this program has absolutely no problem to reason about bitwidths like 65535.
 
 UPPER = 129
 
+
+def usage():
+    print(USAGE_FMT.format(prog=argv[0], upper=UPPER))
+    exit(1)
+
+
+def analyze_single(v):
+    print("v and its zeros:", search(v))
+    print("self-maps:", selves(v))
+
+
+def analyze_all():
+    all_selves = {n: selves(n) for n in range(0, UPPER)}
+    print({n for (n, s) in all_selves.items() if len(s) != 0})
+
+
 if __name__ == "__main__":
     from sys import argv
-    if len(argv) == 2:
-        print("v and its zeros:", search(int(argv[1])))
-        print("self-maps:", selves(int(argv[1])))
+    if len(argv) < 1:
+        usage()
+    elif len(argv) == 2:
+        analyze_single(int(argv[1]))
     elif len(argv) == 1:
-        all_selves = {n: selves(n) for n in range(0, UPPER)}
-        print({n for (n, s) in all_selves.items() if len(s) != 0})
+        analyze_all()
     else:
-        print(USAGE_FMT.format(prog=argv[0], upper=UPPER))
-        exit(1)
+        usage()
