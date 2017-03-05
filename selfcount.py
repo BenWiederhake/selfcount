@@ -52,10 +52,15 @@ def selves(n):
 
 USAGE_FMT = \
 """{prog} – binary numbers that count their own zeros: hilarity ensues
-Usage: {prog} [N]
-If no N is given, {prog} prints the set of bitwidths up to {upper}
+Usage: {prog} {{COMMAND}} [ARGS]
+COMMAND can be any of:
+
+    {prog} all
+{prog} prints the set of bitwidths (up to {upper})
 that have such a self-describing number.
-If N is given, then a short analysis of the bitwidth N is printed.
+
+    {prog} about N
+A short analysis of the bitwidth N is printed.
 
 Running time and consumed memory is roughly logarithmic in N.
 So this program has absolutely no problem to reason about bitwidths like 65535.
@@ -82,11 +87,11 @@ def analyze_all():
 
 if __name__ == "__main__":
     from sys import argv
-    if len(argv) < 1:
+    if len(argv) <= 1:
         usage()
-    elif len(argv) == 2:
-        analyze_single(int(argv[1]))
-    elif len(argv) == 1:
+    elif argv[1] == "about" and len(argv) == 3:
+        analyze_single(int(argv[2]))
+    elif argv[1] == "all" and len(argv) == 2:
         analyze_all()
     else:
         usage()
